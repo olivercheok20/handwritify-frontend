@@ -17,8 +17,8 @@ function htmlToElement(html) {
 
 async function getTokens() {
     return await fetch("https://accounts.spotify.com/api/token", {
-        // body: "grant_type=authorization_code&code=" + urlParams["code"] + "&redirect_uri=http%3A%2F%2Flocalhost%3A8000%2F",
-        body: "grant_type=authorization_code&code=" + urlParams["code"] + "&redirect_uri=http%3A%2F%2F192.168.1.7%3A8000%2F",
+        body: "grant_type=authorization_code&code=" + urlParams["code"] + "&redirect_uri=https%3A%2F%2Fhandwritify.netlify.app%2F",
+        // body: "grant_type=authorization_code&code=" + urlParams["code"] + "&redirect_uri=http%3A%2F%2F192.168.1.7%3A8000%2F",
         headers: {
             "Authorization": "Basic Y2MxODBhZWQwMWY4NDExMDlkMTFjYjVjOTA0N2Y5NWI6NDFiZWFlZDQ5ZDZmNGEwOWFmMTQzNDZmYmVlNDVjYWE=",
             "Content-Type": "application/x-www-form-urlencoded"
@@ -195,14 +195,19 @@ async function getArtwork() {
         "bg_color": bg_color,
     }
 
-    await fetch("http://127.0.0.1:5000/", {
-    // await fetch("http://192.168.1.7:5000/", {
-            method: "POST",
+    // console.log(data)
+
+    // await fetch("http://127.0.0.1:5000/", {
+    // await fetch("http://localhost:5000/", {
+    await fetch("https://handwritify.herokuapp.com/", {
+        method: "POST",
         body: JSON.stringify(data),
-        headers: { 'Content-type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' }
     })
     .then(r => r.text())
     .then(data => {
+
+        // console.log(data)
 
         document.getElementById('tracklist').innerHTML = '<canvas id="canvas" width="360" height="640" style="cursor: pointer"></canvas>';
         document.getElementById('canvas').addEventListener('click', function() { 
