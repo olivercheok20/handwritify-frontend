@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Handwritify</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i">
+</head>
+
+<body>
+    <header id="header" class="text-center text-white masthead">
+        <div class="masthead-content">
+            <div class="container">
+                <h1 class="masthead-heading mb-0">Handwritify</h1>
+                <div id="login">
+                    <h3 class="mb-0">Generate Handwritten Tracklists</h3>
+                    <!-- <a class="btn btn-primary btn-xl rounded-pill mt-5" role="button" href="https://accounts.spotify.com/authorize?client_id=cc180aed01f841109d11cb5c9047f95b&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A8000%2F&scope=user-top-read"> -->
+                    <a class="btn btn-primary btn-xl rounded-pill mt-5" role="button" href="https://accounts.spotify.com/authorize?client_id=cc180aed01f841109d11cb5c9047f95b&response_type=code&redirect_uri=http%3A%2F%2F192.168.1.7%3A8000%2F&scope=user-top-read">
+                        Log In With Spotify
+                    </a>
+                </div>
+                <div id="loggedin">
+                    <h3 id="instruction" class="mb-0">Select Time Period</h3>
+
+                    <div class="row mt-5 justify-content-center">
+                        <div class="col-lg-3">
+                            <div class="row px-3" id="month-submit">
+                                <a class="btn btn-primary btn-xl rounded-pill my-2" onclick="getTracklist('short_term')">
+                                    Last Month
+                                </a>
+                            </div>
+                            <div class="row px-3" id="3-months-submit">
+                                <a class="btn btn-primary btn-xl rounded-pill my-2" onclick="getTracklist('medium_term')">
+                                    Last 3 Months
+                                </a>     
+                            </div>
+                            <div class="row px-3" id="all-time-submit">
+                                <a class="btn btn-primary btn-xl rounded-pill my-2" onclick="getTracklist('long_term')">
+                                    All Time
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 justify-content-center time-period-selected" id="tracklist">
+                            <canvas id="canvas" width="360" height="640"></canvas><div id="png-container"></div>
+                        </div>
+                        <div class="col-lg-3 time-period-selected">
+                            <div class="row py-2 justify-content-center">
+                                <h4>Bias</h4>
+                                <input id="bias" data-slider-id='bias_slider' type="text" data-slider-min="0.15" data-slider-max="2.5" data-slider-step="0.02" data-slider-value="0.75"/>
+                            </div>
+                            <div class="row py-2 justify-content-center">
+                                <h4>Width</h4>
+                                <input id="width" data-slider-id='width_slider' type="text" data-slider-min="0.1" data-slider-max="1.5" data-slider-step="0.02" data-slider-value="1"/>
+                            </div>
+                            <div class="row py-2 justify-content-center">
+                                <h4>Font Color</h4>
+                                <input id="font-color" type="color" class="form-control form-control-color" value="#000000" title="Choose your font color">
+                            </div>
+                            <div class="row py-2 justify-content-center">
+                                <h4>Background Color</h4>
+                                <input id="bg-color" type="color" class="form-control form-control-color" value="#FFFFFF" title="Choose your background color">
+                            </div>
+
+                            <div class="row py-2 px-3" id="all-time-submit">
+                                <a class="btn btn-primary btn-xl rounded-pill" onclick="getArtwork()">
+                                    Generate
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-circle-1 bg-circle"></div>
+        <div class="bg-circle-2 bg-circle"></div>
+        <div class="bg-circle-3 bg-circle"></div>
+        <div class="bg-circle-4 bg-circle"></div>
+    </header>
+
+    <section>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-lg-2">
+                    <div class="p-5"><img class="rounded-circle img-fluid" src="assets/img/03.jpg"></div>
+                </div>
+                <div class="col-lg-6 order-lg-1">
+                    <div class="p-5">
+                        <h2 class="display-4">Handwriting Synthesis</h2>
+                        <p>Handwriting is programmatically generated using recurrent neural networks employing Long Short-Term Memory (LSTM) trained on the IAM On-Line Handwriting Database (IAM-OnDB). You can read the details in Alex Graves' paper entitled <em>Generating Sequences With Recurrent Neural Networks</em>, available&nbsp;<a href="https://arxiv.org/abs/1308.0850" target="_blank">here</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-5 bg-black">
+        <div class="container">
+            <p class="text-center text-white m-0 small">Oliver Cheok © 2021</p>
+        </div>
+    </footer>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvg/3.0.7/umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.js"></script>
+    <script src="assets/js/scripts.js?v=5"></script>
+</body>
+
+</html>
