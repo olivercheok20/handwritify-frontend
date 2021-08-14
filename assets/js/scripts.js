@@ -120,6 +120,8 @@ async function getTracklist(term) {
 
     var tracks = [];
 
+    var err_occurred;
+
     for (var i = 0; i < time_period_selected.length; i++) {
         time_period_selected[i].style.display="initial";
     }
@@ -143,7 +145,16 @@ async function getTracklist(term) {
                 });
             }
         );
+    })
+    .catch(error => {
+        err_occurred = true;
+        document.getElementById("instruction").innerHTML = "Sorry! You account is currently not authorized for this service."
+        document.getElementById("tracklist").innerHTML = "Please contact the site developer at olivercheok20@gmail.com if you wish to seek authorization."
     });
+
+    if (err_occurred) {
+        return false;
+    }
 
     // console.log(tracks);
     localStorage.setItem("tracks", JSON.stringify(tracks));
